@@ -30,6 +30,8 @@ class Game
       retry
     else
       board.update_state(current_player.marker, choice)
+      self.game_over = true if board.player_won?(current_player.marker)
+
       switch_player
     end 
   end
