@@ -41,8 +41,10 @@ class Game
     else
       picked_fields.push(choice)      
       board.update_state(current_player.marker, choice)
-      end_game if board.player_won?(current_player.marker)
-
+      
+      end_game { puts "#{current_player.marker} WON THE GAME!!!" } if board.player_won?(current_player.marker)
+      end_game { puts "It was a tie!" } unless board.state.any? { |element| element.is_a? Integer }
+      
       switch_player
     end 
   end
@@ -50,8 +52,12 @@ class Game
   def end_game
     board.draw
     self.game_over = true
+    yield
     
-    puts "#{current_player.marker} WON THE GAME!!!"
+    new_game?
+  end
+
+  def new_game?
     puts ""
     puts "Would you like to start a new game? (y/n)"
     new_game_choice = gets.chomp

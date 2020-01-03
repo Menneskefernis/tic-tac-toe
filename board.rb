@@ -1,4 +1,6 @@
 class Board  
+  attr_reader :state
+  
   def draw
     puts ""
     puts "| #{state[0]} | #{state[1]} | #{state[2]} |"
@@ -33,7 +35,7 @@ class Board
   end
 
   private
-  attr_accessor :state
+  attr_writer :state
   attr_reader :win_combos
 
   def initialize
